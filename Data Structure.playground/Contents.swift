@@ -297,6 +297,27 @@ func createMatrixWithLength(_ length: Int) -> ([[Int]], Int, Int)? {
  * Найти среди его элементов два, разность которых имеет наибольшее значение.
 */
 
+func findMinAndMaxInRandomList() -> (Int, Int) {
+  var list: [Int] = []
+  var min:  Int   = 20
+  var max:  Int   = -5
+  
+  for _ in 1...75 {
+    list.append(Int(arc4random_uniform(26)) - 5)
+  }
+  
+  for number in list {
+    if min > number {
+      min = number
+    }
+    if max < number {
+      max = number
+    }
+  }
+  
+  return (min, max)
+}
+
 
 
 
