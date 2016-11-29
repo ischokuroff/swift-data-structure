@@ -182,7 +182,7 @@ func fibonacci(_ k: Int) -> (Int) {
  * а также работает на всем диапазоне (можно применить arc4random() % 100 для получения чисел в промежутке [0, 100) )
  */
 
-func createRandomArray(withLength length: Int) -> (generatedArray: [Int], primeNumbers: [Int])? {
+func createRandomArray(withLength length: Int) -> ([Int], [Int])? {
   if length < 1 {
     return nil
   }
@@ -213,7 +213,7 @@ func createRandomArray(withLength length: Int) -> (generatedArray: [Int], primeN
  * Найти в нем два наименьших элемента (и вывести на экран)
  */
 
-func createRandomArrayWithLength(_ length: Int, andPrint2MinimalElements show: Bool) -> (generatedArray: [Int], minimalElements: [Int])? {
+func createRandomArrayWithLength(_ length: Int, andPrint2MinimalElements show: Bool) -> ([Int], [Int])? {
   if length < 1 {
     return nil
   }
@@ -318,9 +318,49 @@ func findMinAndMaxInRandomList() -> (Int, Int) {
   return (min, max)
 }
 
+/*
+ * Задание 15
+ * Найти наибольший общий делитель (НОД) двух введенных натуральных чисел, используя алгоритм Евклида.
+ * Алгоритм Евклида: вычитаем из большего числа меньшее до тех пор, пока они не сравняются;
+ * полученное в результате число и есть НОД.
+*/
 
-
-
+// greatest common divisor
+func gcv(_ a: Int, _ b: Int) -> Int? {
+  var greater: Int  = 0
+  var smaller: Int  = 0
+  
+  if a == b {
+    return a
+  }
+  if a > b {
+    greater = a
+    smaller = b
+  } else {
+    greater = b
+    smaller = a
+  }
+  
+  repeat {
+    let updatedGreater = greater - smaller
+    greater = updatedGreater
+    
+    if greater == smaller {
+      return greater
+    }
+    
+    if greater > smaller {
+      continue
+    } else {
+      greater = smaller
+      smaller = updatedGreater
+    }
+    
+  } while !(greater == smaller)
+  
+  // if error will appear..
+  return nil
+}
 
 
 
