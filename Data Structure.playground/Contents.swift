@@ -42,6 +42,8 @@ func findNumbers(from min: Int, to max: Int, whereCountOfSeven n: Int) -> Any {
   return necessaryNumbers
 }
 
+//findNumbers(from: 0, to: 1000, whereCountOfSeven: 1)
+
 /*
  * Задание 2
  * Написать функцию, принимающую натуральное трехзначное число.
@@ -65,6 +67,8 @@ func reverseNumber(number: Int) -> Any {
   
   return reverseNumber
 }
+
+//reverseNumber(number: 678)
 
 /*
  * Задание 3
@@ -93,14 +97,32 @@ func isLuckyNumber(_ number: Int) -> Any {
   
 }
 
+//isLuckyNumber(1345)
+//isLuckyNumber(1331)
+
 /*
  * Задание 4
  * Реализовать метод вычисления факториала.
  */
 
-func factorial(_ n: Int) -> Int {
-  return n == 0 ? 0 : factorial(n) * factorial(n - 1)
+func factorial(_ number: Int) -> Int? {
+  if number < 0 {
+    return nil
+  }
+  if number == 1 {
+    return 1
+  }
+  
+  var result = 1
+  
+  for i in 1...number {
+    result *= i
+  }
+  
+  return result
 }
+
+//factorial(5)
 
 /*
  * Задание 8
@@ -141,13 +163,15 @@ func findMagicNumbers() -> [Int] {
   return result
 }
 
+//findMagicNumbers()
+
 /*
  * Задание 9
  * Написать функцию, принимающую натуральные числа n и k.
  * Задача функции: определить k-ю справа цифру числа n.
  */
 
-func findDigit(onPosition k: Int, ofNumber n: Int) -> Int {
+func findDigit(forNumber n: Int, onPosition k: Int) -> Int {
   var digits: [String] = []
   let index:  Int      = k - 1
   
@@ -158,18 +182,29 @@ func findDigit(onPosition k: Int, ofNumber n: Int) -> Int {
   return Int(digits[index])!
 }
 
+//findDigit(forNumber: 1968, onPosition: 4)
+
 /*
  * Задание 10
  * Написать функцию, вычисляющее число Фибоначчи.
  */
 
-func fibonacci(_ k: Int) -> (Int) {
-  if k <= 1 {
-    return k
-  } else {
-    return fibonacci(k - 1) + fibonacci(k - 2)
+func fibonacci(_ number: Int) -> Int {
+  if number < 0 {
+    return 0
+  }
+  
+  switch number {
+  case 0:
+    return 0
+  case 1:
+    return 1
+  default:
+    return fibonacci(number - 1) + fibonacci(number - 2)
   }
 }
+  
+//fibonacci(7)
 
 /*
  * Задание 11
@@ -206,6 +241,8 @@ func createRandomArray(withLength length: Int) -> ([Int], [Int])? {
   
   return (generatedArray, primeNumbers)
 }
+
+//createRandomArray(withLength: 10)
 
 /*
  * Задание 12
@@ -253,7 +290,7 @@ func createRandomArrayWithLength(_ length: Int, andPrint2MinimalElements show: B
   }
 }
 
-createRandomArrayWithLength(10, andPrint2MinimalElements: true)
+//createRandomArrayWithLength(10, andPrint2MinimalElements: true)
 
 /*
  * Задание 13
@@ -290,6 +327,8 @@ func createMatrixWithLength(_ length: Int) -> ([[Int]], Int, Int)? {
   return (generatedArray, firstSum, secondSum)
 }
 
+//createRandomArray(withLength: 3)
+
 /*
  * Задание 14
  * Сформировать целочисленный массив A(75),
@@ -318,6 +357,8 @@ func findMinAndMaxInRandomList() -> (Int, Int) {
   return (min, max)
 }
 
+//findMinAndMaxInRandomList()
+
 /*
  * Задание 15
  * Найти наибольший общий делитель (НОД) двух введенных натуральных чисел, используя алгоритм Евклида.
@@ -345,6 +386,7 @@ func gcv(_ a: Int, _ b: Int) -> Int? {
     let updatedGreater = greater - smaller
     greater = updatedGreater
     
+    // exit from this repeat-while loop
     if greater == smaller {
       return greater
     }
@@ -361,3 +403,5 @@ func gcv(_ a: Int, _ b: Int) -> Int? {
   // if error will appear..
   return nil
 }
+
+//gcv(10, 15)
