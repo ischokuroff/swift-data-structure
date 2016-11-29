@@ -361,34 +361,3 @@ func gcv(_ a: Int, _ b: Int) -> Int? {
   // if error will appear..
   return nil
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
