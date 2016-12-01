@@ -122,7 +122,67 @@ func factorial(_ number: Int) -> Int? {
   return result
 }
 
-//factorial(5)
+/*
+ * Задание 5
+ * Вычислить значение функции Y=F(X),заданной графиком
+ * y = 0.5 при X<=-0.5
+ * y = X+1 при -0.5<X<=0 
+ * y = X*X-1 при 0<X<=1
+ * y = X-1 при X>1
+ * Повышенный уровень: написать с использованием конструкции switch
+*/
+
+func simpleFunctionY(_ x: Float) -> Any? {
+  var y: Float?
+  var useCase: Int = 0
+  
+  if x <= -0.5 {
+    useCase = 0
+  }
+  if x > -0.5 && x <= 0 {
+    useCase = 1
+  }
+  if x > 0 && x <= 1 {
+    useCase = 2
+  }
+  if x > 1 {
+    useCase = 3
+  }
+  
+  switch useCase {
+  case 0:
+    return 0
+  case 1:
+    y = x + 1
+  case 2:
+    y = sqrt(x) - 1
+  case 3:
+    y = x - 1
+  default:
+    return nil
+  }
+  
+  return y!
+}
+
+/*
+ * Задание 6
+ * Вычислить значение функции G=F(X),заданной графиком
+ * y = sin(π/2), если X<=0.5
+ * y = sin((X-1)*π/2), если X>0.5
+*/
+
+func simpleFunctionG(_ x: Double) -> Any? {
+  var y: Double?
+  
+  if x <= 0.5 {
+    y = sin(M_PI / 2)
+  } else {
+    y = sin((x - 1) * M_PI / 2)
+  }
+  
+  return y!
+}
 
 /*
  * Задание 8
@@ -405,3 +465,44 @@ func gcv(_ a: Int, _ b: Int) -> Int? {
 }
 
 //gcv(10, 15)
+
+/*
+ * Задание 16
+ * Необходимо реализовать игру «Камень-ножница-бумага».
+ * Нужно дать пользователю сыграть против компьютера.
+ * Камень побеждает ножницы, ножницы побеждают бумагу, а бумага побеждает камень.
+*/
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
