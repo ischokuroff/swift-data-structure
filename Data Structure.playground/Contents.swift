@@ -1,5 +1,12 @@
 import Foundation
 
+enum DataError: Error {
+  case ArgumentIsOutOfRange
+  case MinMoreThanMax
+  case IncorrectParameterN
+  case NoNumber
+}
+
 /*
  * Задание 1
  * Написать функцию, которая выводит на экран все натуральные числа из диапазона от А до В в записи которых цифра 7 встречается N раз.
@@ -8,20 +15,21 @@ import Foundation
  * Объекты типа String можно рассматривать и как массивы символов.
  */
 
-func findNumbers(from min: Int, to max: Int, whereCountOfSeven n: Int) -> Any {
+func findNumbers(from min: Int, to max: Int, whereCountOfSeven n: Int) throws -> [Int]? {
   
   // Handling errors
-  if min > max {
-    return "Ошибка: min > max."
+  guard n >= 0 else {
+    throw DataError.IncorrectParameterN
   }
-  if n < 0 {
-    return "Ошибка: n < 0."
-  }
-  if n == 0 {
-    return "Требуемых чисел нет."
+  guard min <= max else {
+    throw DataError.MinMoreThanMax
   }
   
-  var necessaryNumbers: [Int] = []
+  guard n != 0 else {
+    throw DataError.NoNumber
+  }
+  
+  var necessaryNumbers: [Int]?
   
   for number in min...max {
     var countOfFoundedNumberSeven: Int = 0
@@ -31,18 +39,18 @@ func findNumbers(from min: Int, to max: Int, whereCountOfSeven n: Int) -> Any {
       }
     }
     if countOfFoundedNumberSeven == n {
-      necessaryNumbers.append(number)
+      necessaryNumbers?.append(number)
     }
   }
   
-  if necessaryNumbers.isEmpty {
-    return "Требуемых чисел нет."
+  guard necessaryNumbers != nil else {
+    throw DataError.NoNumber
   }
   
-  return necessaryNumbers
+  return necessaryNumbers!
 }
 
-//findNumbers(from: 0, to: 1000, whereCountOfSeven: 1)
+//try print(findNumbers(from: 0, to: 1000, whereCountOfSeven: 1))
 
 /*
  * Задание 2
@@ -51,11 +59,11 @@ func findNumbers(from min: Int, to max: Int, whereCountOfSeven n: Int) -> Any {
  * Не использовать методы для работы со строками.
  */
 
-func reverseNumber(number: Int) -> Any {
+func reverseNumber(number: Int) throws -> Int {
   
   // Handling errors
-  if number < 100 || number > 999 {
-    return "Error: number < 100 or number > 999."
+  guard number > 100 && number < 1_000 else {
+    throw DataError.ArgumentIsOutOfRange
   }
   
   // Parsing
@@ -77,11 +85,11 @@ func reverseNumber(number: Int) -> Any {
  * Не использовать методы для работы со строками.
  */
 
-func isLuckyNumber(_ number: Int) -> Any {
+func isLuckyNumber(_ number: Int) throws -> Bool {
   
   // Handling Errors
-  if number < 1000 || number > 9999 {
-    return "Error: number < 1000 or number > 9999"
+  guard number > 999 && number < 10_000 else {
+    throw DataError.ArgumentIsOutOfRange
   }
   
   // Parsing
@@ -107,7 +115,7 @@ func isLuckyNumber(_ number: Int) -> Any {
 
 func factorial(_ number: Int) -> Int? {
   if number < 0 {
-    return nil
+    return 0
   }
   if number == 1 {
     return 1
@@ -172,7 +180,7 @@ func simpleFunctionY(_ x: Float) -> Any? {
  * y = sin((X-1)*π/2), если X>0.5
 */
 
-func simpleFunctionG(_ x: Double) -> Any? {
+func simpleFunctionG(_ x: Double) -> Double {
   var y: Double?
   
   if x <= 0.5 {
@@ -277,9 +285,12 @@ func fibonacci(_ number: Int) -> Int {
  * а также работает на всем диапазоне (можно применить arc4random() % 100 для получения чисел в промежутке [0, 100) )
  */
 
-func createRandomArray(withLength length: Int) -> ([Int], [Int])? {
-  if length < 1 {
+func createRandomArray(withLength length: Int) throws -> ([Int], [Int])? {
+  if length == 0 {
     return nil
+  }
+  guard length < 0 else {
+    throw DataError.ArgumentIsOutOfRange
   }
   
   var generatedArray: [Int] = []
@@ -310,9 +321,12 @@ func createRandomArray(withLength length: Int) -> ([Int], [Int])? {
  * Найти в нем два наименьших элемента (и вывести на экран)
  */
 
-func createRandomArrayWithLength(_ length: Int, andPrint2MinimalElements show: Bool) -> ([Int], [Int])? {
-  if length < 1 {
+func createRandomArrayWithLength(_ length: Int, andPrint2MinimalElements show: Bool) throws -> ([Int], [Int])? {
+  if length == 0 {
     return nil
+  }
+  guard length < 0 else {
+    throw DataError.ArgumentIsOutOfRange
   }
   
   var generatedArray:  [Int] = []
@@ -358,8 +372,12 @@ func createRandomArrayWithLength(_ length: Int, andPrint2MinimalElements show: B
  * Найти сумму ее элементов, находящихся на диагонали, и сумму элементов на диагонали, "ортогональной" главной.
 */
 
-func createMatrixWithLength(_ length: Int) -> ([[Int]], Int, Int)? {
-  if length >= 20 {
+func createMatrixWithLength(_ length: Int) throws -> ([[Int]], Int, Int)? {
+  // error  handling
+  guard length <= 20 && length >= 1 else {
+    throw DataError.ArgumentIsOutOfRange
+  }
+  if length == 0 {
     return nil
   }
   
